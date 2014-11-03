@@ -1,0 +1,81 @@
+CrawlerAndETL    爬蟲與ETL
+|---Steam
+    |---Crawler
+        |---all_steam_pages.py               
+            抓取Steam美國網站上所有遊戲網頁的連結
+        |---CrawlerLBHaboutXML2.py           
+            藉由先前的連結檔案，抓取價格記錄與網頁內容
+        |---CrawlerLBHaboutXMLFromUSA.py     
+            抓取美國網站的所有價格記錄與網頁內容
+        |---CrawlerLBHaboutXMLMoreThan18.py  
+            抓取18禁的遊戲價格記錄與網頁內容
+        |---CrawlerSteamPagesLinksLYT.py     
+            抽出所有遊戲頁面連結
+    |---Extrat
+        |---ExtractAllContent.py             
+            將所有抓下來的遊戲網頁進行抽取的動作(需修改檔案路徑)
+        |---ExtractSubContent.py             
+            將所有抓下來的遊戲補充包網頁進行抽取的動作(需修改檔案路徑)
+        |---ExtractAllContentForTest.py      
+            第二步驟的測試檔
+        |---ExtractPriceHistory.py           
+            將價格紀錄網頁擷取儲存成csv
+        |---ExtractSteamTag.py               
+            抽出該遊戲的所有遊戲標籤
+    |---Transform
+        |---OrganizeSteamPrice.py            
+            將Steam的每天日期價格補齊
+|---IsThereAnyDeal
+    |---CrawlerAndExtract
+        |---historyAjaxs(inputIsHttpLink).py 
+            抓取歷史價格
+        |---Transform
+            |---isthereanydeal_to_MetaCritic.py
+            |---isthereanydeal_to_Steam.py   
+                取得兩網站對應的遊戲名稱
+|---MetaCritic
+    |---MGameETL.py                          
+        MetaCritic.com 的內容爬取程式
+    |---MContentCrawler.py        
+    |---MGameLinkCrawler.py
+    |---MNavLinkCrawler.py    
+|---PythonETL
+    |---DetermineTheStatus.py                
+        判斷價格狀態程式 0無變化 1有降價 2有漲價
+    |---OFFER3.py                            
+        樞紐轉換的程式
+|---SQLServer
+    |---Query
+        |---SQLQueryClass1023.sql            
+            日期期間狀態的判斷程式
+        |---SQLQuerydatediffcount.sql        
+            計算每個日期區間有幾筆特價記錄
+    |---Scalar Function
+        |---INIDOUTSNAME_ID.sql              
+            輸入ID輸出SNAME
+        |---INSGNAMEOUTID_SGNAME.sql         
+            輸入SGNAME輸出ID
+        |---INTINTEGER.sql                   
+            判斷大於0的值
+        |---SCORE_SCORE,ID.sql               
+            為了補齊SCORE，沒有的就使用評論分數的平均
+        |---VACATION_DATE.sql                
+            判斷是否為假日
+    |---Stored Procedure
+        |---CLASSBIGTABLE.sql                
+            邏輯式回歸使用的大表 JOIN SGAMETAGTF
+            , SLANGUAGES, ALLCLUSTER_1639, SPROFILE.SCORE
+        |---CSATTR.sql                       
+            邏輯式回歸使用的大表 JOIN 日期區間判斷, SGAMETAGTF, 
+        |---GPHISTORY_ID,COM.sql             
+            輸入ID, company 輸出歷史價格資料
+        |---IPLOGICDATE.sql                  
+            邏輯式回歸使用的日期分開格式
+        |---IPRICEVT.sql                     
+            IPrice連接假期判斷
+        |---MERGETABLE.sql                   
+            MERGE TABLE WITH SGAMETAGTF,SLANGUAGES,PAMK_1639
+        |---SPLOGICDATE.sql                  
+            CREATION DATE TABLE WITH ID CONTROL
+        |---AllScalarFunction.sql            
+            包含所有的function
