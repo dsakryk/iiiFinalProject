@@ -29,10 +29,10 @@ CrawlerAndETL    爬蟲與ETL
     |---CrawlerAndExtract
         |---historyAjaxs(inputIsHttpLink).py 
             抓取歷史價格
-        |---Transform
-            |---isthereanydeal_to_MetaCritic.py
-            |---isthereanydeal_to_Steam.py   
-                取得兩網站對應的遊戲名稱
+    |---Transform
+        |---isthereanydeal_to_MetaCritic.py
+        |---isthereanydeal_to_Steam.py   
+            取得兩網站對應的遊戲名稱
 |---MetaCritic
     |---MGameETL.py                          
         MetaCritic.com 的內容爬取程式
